@@ -1,14 +1,20 @@
-import { renderComponent , expect } from '../test_helper';
+import React from 'react';
+import { mount, shallow } from 'enzyme';
+import { expect } from 'chai';
 import App from '../../src/components/app';
 
-describe('App' , () => {
-  let component;
+function setup() {
+  const wrapper = mount(<App />);
 
-  beforeEach(() => {
-    component = renderComponent(App);
-  });
+  return {
+    wrapper,
+  };
+}
+
+describe('App' , () => {
+  const { wrapper } = setup();
 
   it('renders something', () => {
-    expect(component).to.exist;
+    expect(wrapper).to.exist;
   });
 });

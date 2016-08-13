@@ -14,6 +14,13 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin()
   ],
+
+  externals: {
+    'cheerio': 'window',
+    'react/addons': true,
+    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': true,
+  }
   module: {
     loaders: [{test: /\.js$/, loaders: ['react-hot','babel'], exclude: /node_modules/,},
     ]

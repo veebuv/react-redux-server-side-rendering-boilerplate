@@ -1,0 +1,27 @@
+{
+    "parser": "babel-eslint",
+    "extends": "airbnb",
+    "env": {
+      "browser": true
+    },
+    "rules": {
+      "eqeqeq": [
+        2,
+        "allow-null"
+      ],
+      "max-len": [
+        "error",
+        250,
+        4
+      ],
+      "no-confusing-arrow": 0,
+      "react/jsx-quotes": 0,
+      "react/prefer-stateless-function": 0,
+      "jsx-quotes": [
+        2,
+        "prefer-double"
+      ],
+      "no-underscore-dangle": 0,
+      "import/no-unresolved": 0
+    }
+}
