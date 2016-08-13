@@ -11,7 +11,7 @@
       ],
       "max-len": [
         "error",
-        250,
+        275,
         4
       ],
       "no-confusing-arrow": 0,
