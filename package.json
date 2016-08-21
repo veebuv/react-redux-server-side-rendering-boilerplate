@@ -4,7 +4,7 @@
   "description": "boilerplate",
   "main": "index.js",
   "scripts": {
-    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "start": "babel-node server.js",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
     "test:watch": "npm run test -- --watch"
   },
@@ -38,14 +38,21 @@
     "webpack-dev-server": "^1.14.0"
   },
   "dependencies": {
+    "babel-cli": "6.11.4",
+    "babel-core": "6.11.4",
+    "babel-eslint": "6.1.2",
+    "babel-loader": "6.2.4",
     "babel-preset-stage-1": "^6.1.18",
     "cheerio": "^0.20.0",
     "classnames": "^2.2.5",
+    "express": "^4.14.0",
     "lodash": "^3.10.1",
+    "path": "^0.12.7",
     "react": "^0.14.8",
     "react-dom": "^0.14.8",
     "react-redux": "^4.0.0",
     "react-router": "^2.0.1",
-    "redux": "^3.0.4"
+    "redux": "^3.0.4",
+    "redux-thunk": "^2.1.0"
   }
 }
