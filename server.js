@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import configureStore from './src/configureStore';
 import renderFullHTMLPage from './renderFullHTMLPage';
 import App from './src/components/app';
+import axios from 'axios';
 import path from 'path';
 
 const server = express();
@@ -14,7 +15,14 @@ server.get('/favicon.ico', (req, res) => res.send(''));
 
 server.get('/', async (req, res) => {
   try {
-    const store = configureStore();
+    const API_KEY = 'ENTER API KEY HERE!!!!';
+
+    const ROOT_URL = `http://api.openweathermap.org/data/2.5/forecast?appid=${API_KEY}`;
+
+    const URL = `${ROOT_URL}&q=Sydney`;
+    const request = await axios.get(URL);
+
+    const store = configureStore({ data: request.data });
 
     const intialHTML = renderToString(
       <Provider store={store}>

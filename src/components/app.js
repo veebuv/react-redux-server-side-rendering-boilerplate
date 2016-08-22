@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-export default class App extends Component {
+import { connect } from 'react-redux';
+
+export class App extends Component {
 
   constructor(props) {
     super(props);
@@ -9,6 +11,7 @@ export default class App extends Component {
   }
 
   render() {
+    console.log('data',this.props.data);
     const { initialMessage } = this.state;
     return (
       <div>
@@ -17,3 +20,11 @@ export default class App extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    data: state.data,
+  };
+}
+
+export default connect(mapStateToProps)(App);

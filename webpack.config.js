@@ -1,8 +1,7 @@
-const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
-  entry: [
+  entry: ['babel-polyfill',
     './src/index.js',
   ],
   output: {
