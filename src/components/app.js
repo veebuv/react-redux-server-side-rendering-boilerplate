@@ -11,7 +11,6 @@ export class App extends Component {
   }
 
   render() {
-    console.log('data',this.props.data);
     const { initialMessage } = this.state;
     return (
       <div>

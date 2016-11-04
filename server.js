@@ -10,12 +10,16 @@ import path from 'path';
 
 const server = express();
 server.disable('x-powered-by');
-server.use(express.static(path.join(__dirname, '/')));
+server.use('/images', express.static(path.join(__dirname, '../src/assets/images')));
+server.use('/scripts', express.static('assets'));
+server.use('/styles', express.static('assets'));
+server.use('/built', express.static(path.join(__dirname, '/lib')));
+server.use(express.static(path.join(__dirname, '../')));
 server.get('/favicon.ico', (req, res) => res.send(''));
 
 server.get('/', async (req, res) => {
   try {
-    const API_KEY = 'ENTER API KEY HERE!!!!';
+    const API_KEY = '3e37a8d02f7a9d89bdf045c664fd5cdc';
 
     const ROOT_URL = `http://api.openweathermap.org/data/2.5/forecast?appid=${API_KEY}`;
 
