@@ -3,13 +3,13 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 
 const config = {
-  entry: [
+  entry: ['babel-polyfill',
     './src/index.js',
   ],
   output: {
-    path: __dirname + "/lib",
-    publicPath: '/',
+    path: __dirname + '/built',
     filename: 'bundle.js',
+    publicPath: 'built/',
   },
   externals: {
     cheerio: 'window',
@@ -20,7 +20,7 @@ const config = {
 
   plugins: [
     new webpack.NoErrorsPlugin(),
-    new ExtractTextPlugin("styles.css"),
+    new ExtractTextPlugin('style.css'),
   ],
 
   module: {
@@ -35,7 +35,8 @@ const config = {
         loader: ExtractTextPlugin.extract('style', 'css-loader?modules&importLoaders=1&localIdentName=[name]_[local]_[hash:base64:5]'),
       },
       { test: /\.(png|jpg|jpeg|gif|svg|woff)$/,
-        loader: 'file?name=[name].[ext]', exclude: /node_modules/ },
+        loader: 'file?name=[name].[ext]', exclude: /node_modules/,
+      },
     ],
   },
 };
@@ -44,12 +45,12 @@ const serverConfig = {
   name: 'server',
   target: 'node',
   externals: [nodeExternals()],
-  entry: [
-    './server.js',
+  entry: ['babel-polyfill',
+    './lib/server.js',
   ],
   output: {
     path: __dirname + '/built',
-    filename: 'server.js',
+    filename: './server.js',
     publicPath: 'built/',
   },
   module: {
@@ -62,6 +63,9 @@ const serverConfig = {
       {
         test: /\.css$/,
         loader: 'css-loader/locals?modules&importLoaders=1&localIdentName=[name]_[local]_[hash:base64:5]',
+      },
+      { test: /\.(png|jpg|jpeg|gif|svg|woff)$/,
+        loader: 'file?name=[name].[ext]', exclude: /node_modules/,
       },
     ],
   },

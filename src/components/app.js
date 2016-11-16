@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import styles from './app.css';
 
 export class App extends Component {
 
@@ -13,7 +14,7 @@ export class App extends Component {
   render() {
     const { initialMessage } = this.state;
     return (
-      <div>
+      <div className={styles.root}>
         {initialMessage}
       </div>
     );

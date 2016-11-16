@@ -6,12 +6,12 @@ export default function renderFullHTMLPage(stringifyHTML, initialState) {
     <html>
       <head>
         <title>server side rendering</title>
-        <link rel="stylesheet" type="text/css" href="/style/style.css" />
+        <link rel="stylesheet" type="text/css" href="/scripts/style.css" />
       </head>
       <body>
         <div id="root" dangerouslySetInnerHTML={{ __html: stringifyHTML }} />
         <script dangerouslySetInnerHTML={{ __html: `window.__PRELOADED_STATE__ = ${JSON.stringify(initialState)};` }}></script>
-        <script src="/dist/bundle.js"></script>
+        <script src="/scripts/bundle.js"></script>
       </body>
     </html>
   )}`;
