@@ -30,6 +30,7 @@ const config = {
         presets: ['es2015', 'stage-0', 'react'],
         loaders: ['babel'], exclude: /node_modules/,
       },
+      { test: /\.json$/, loader: 'json', exclude: /node_modules/ },
       {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract('style', 'css-loader?modules&importLoaders=1&localIdentName=[name]_[local]_[hash:base64:5]!postcss?parser=postcss-scss'),
@@ -73,6 +74,7 @@ const serverConfig = {
         presets: ['es2015', 'stage-0', 'react'],
         loaders: ['babel'], exclude: /node_modules/,
       },
+      { test: /\.json$/, loader: 'json', exclude: /node_modules/ },
       {
         test: /\.css$/,
         loader: 'css-loader/locals?modules&importLoaders=1&localIdentName=[name]_[local]_[hash:base64:5]',
