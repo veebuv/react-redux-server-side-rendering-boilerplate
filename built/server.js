@@ -44,44 +44,47 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(1);
+	__webpack_require__(1);
+	module.exports = __webpack_require__(2);
 
 
 /***/ },
 /* 1 */
+/***/ function(module, exports) {
+
+	module.exports = require("babel-polyfill");
+
+/***/ },
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__dirname) {'use strict';
 
-	var _express = __webpack_require__(2);
+	var _express = __webpack_require__(3);
 
 	var _express2 = _interopRequireDefault(_express);
 
-	var _react = __webpack_require__(3);
+	var _react = __webpack_require__(4);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _server = __webpack_require__(4);
+	var _server = __webpack_require__(5);
 
-	var _reactRedux = __webpack_require__(5);
+	var _reactRedux = __webpack_require__(6);
 
-	var _configureStore = __webpack_require__(6);
+	var _configureStore = __webpack_require__(7);
 
 	var _configureStore2 = _interopRequireDefault(_configureStore);
 
-	var _renderFullHTMLPage = __webpack_require__(10);
+	var _renderFullHTMLPage = __webpack_require__(11);
 
 	var _renderFullHTMLPage2 = _interopRequireDefault(_renderFullHTMLPage);
 
-	var _app = __webpack_require__(11);
+	var _app = __webpack_require__(12);
 
 	var _app2 = _interopRequireDefault(_app);
 
-	var _axios = __webpack_require__(12);
-
-	var _axios2 = _interopRequireDefault(_axios);
-
-	var _path = __webpack_require__(13);
+	var _path = __webpack_require__(14);
 
 	var _path2 = _interopRequireDefault(_path);
 
@@ -92,9 +95,10 @@
 	var server = (0, _express2.default)();
 	server.disable('x-powered-by');
 	server.use('/images', _express2.default.static(_path2.default.join(__dirname, '../src/assets/images')));
-	server.use('/scripts', _express2.default.static('assets'));
-	server.use('/styles', _express2.default.static('assets'));
-	server.use('/built', _express2.default.static(_path2.default.join(__dirname, '/lib')));
+	server.use('/scripts', _express2.default.static('built'));
+	server.use('/styles', _express2.default.static('lib'));
+	server.use('/built', _express2.default.static(_path2.default.join(__dirname, 'built')));
+	server.use('/built', _express2.default.static('built'));
 	server.use(_express2.default.static(_path2.default.join(__dirname, '../')));
 	server.get('/favicon.ico', function (req, res) {
 	  return res.send('');
@@ -102,49 +106,37 @@
 
 	server.get('/', function () {
 	  var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee(req, res) {
-	    var API_KEY, ROOT_URL, URL, request, store, intialHTML, state;
+	    var data, store, intialHTML, state;
 	    return regeneratorRuntime.wrap(function _callee$(_context) {
 	      while (1) {
 	        switch (_context.prev = _context.next) {
 	          case 0:
-	            _context.prev = 0;
-	            API_KEY = '3e37a8d02f7a9d89bdf045c664fd5cdc';
-	            ROOT_URL = 'http://api.openweathermap.org/data/2.5/forecast?appid=' + API_KEY;
-	            URL = ROOT_URL + '&q=Sydney';
-	            _context.next = 6;
-	            return _axios2.default.get(URL);
-
-	          case 6:
-	            request = _context.sent;
-	            store = (0, _configureStore2.default)({ data: request.data });
-	            intialHTML = (0, _server.renderToString)(_react2.default.createElement(
-	              _reactRedux.Provider,
-	              { store: store },
-	              _react2.default.createElement(_app2.default, null)
-	            ));
-	            state = store.getState();
+	            try {
+	              data = [{ tileImage: 'http://res.cloudinary.com/kingoro/image/upload/v1479035464/image1.png', title: 'Classic Identity', descriptionTitle: 'Brand tone and voice' }];
+	              store = (0, _configureStore2.default)({ data: data });
+	              intialHTML = (0, _server.renderToString)(_react2.default.createElement(
+	                _reactRedux.Provider,
+	                { store: store },
+	                _react2.default.createElement(_app2.default, null)
+	              ));
+	              state = store.getState();
 
 
-	            res.send((0, _renderFullHTMLPage2.default)(intialHTML, state));
-	            _context.next = 17;
-	            break;
+	              res.send((0, _renderFullHTMLPage2.default)(intialHTML, state));
+	            } catch (err) {
+	              /* eslint-disable */
+	              console.error('error', err);
+	              /* eslint-enable */
 
-	          case 13:
-	            _context.prev = 13;
-	            _context.t0 = _context['catch'](0);
+	              res.status(500).send('' + err);
+	            }
 
-	            /* eslint-disable */
-	            console.error('error', _context.t0);
-	            /* eslint-enable */
-
-	            res.status(500).send('' + _context.t0);
-
-	          case 17:
+	          case 1:
 	          case 'end':
 	            return _context.stop();
 	        }
 	      }
-	    }, _callee, undefined, [[0, 13]]);
+	    }, _callee, undefined);
 	  }));
 
 	  return function (_x, _x2) {
@@ -160,31 +152,31 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, "/"))
 
 /***/ },
-/* 2 */
+/* 3 */
 /***/ function(module, exports) {
 
 	module.exports = require("express");
 
 /***/ },
-/* 3 */
+/* 4 */
 /***/ function(module, exports) {
 
 	module.exports = require("react");
 
 /***/ },
-/* 4 */
+/* 5 */
 /***/ function(module, exports) {
 
 	module.exports = require("react-dom/server");
 
 /***/ },
-/* 5 */
+/* 6 */
 /***/ function(module, exports) {
 
 	module.exports = require("react-redux");
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -194,13 +186,13 @@
 	});
 	exports.default = configureStore;
 
-	var _redux = __webpack_require__(7);
+	var _redux = __webpack_require__(8);
 
-	var _reduxThunk = __webpack_require__(8);
+	var _reduxThunk = __webpack_require__(9);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _index = __webpack_require__(9);
+	var _index = __webpack_require__(10);
 
 	var _index2 = _interopRequireDefault(_index);
 
@@ -223,19 +215,19 @@
 	}
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports) {
 
 	module.exports = require("redux");
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports) {
 
 	module.exports = require("redux-thunk");
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -244,7 +236,7 @@
 	  value: true
 	});
 
-	var _redux = __webpack_require__(7);
+	var _redux = __webpack_require__(8);
 
 	var rootReducer = (0, _redux.combineReducers)({
 	  data: function data() {
@@ -256,7 +248,7 @@
 	exports.default = rootReducer;
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -266,11 +258,11 @@
 	});
 	exports.default = renderFullHTMLPage;
 
-	var _react = __webpack_require__(3);
+	var _react = __webpack_require__(4);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _server = __webpack_require__(4);
+	var _server = __webpack_require__(5);
 
 	var _server2 = _interopRequireDefault(_server);
 
@@ -288,20 +280,20 @@
 	        null,
 	        'server side rendering'
 	      ),
-	      _react2.default.createElement('link', { rel: 'stylesheet', type: 'text/css', href: '/style/style.css' })
+	      _react2.default.createElement('link', { rel: 'stylesheet', type: 'text/css', href: '/scripts/style.css' })
 	    ),
 	    _react2.default.createElement(
 	      'body',
 	      null,
 	      _react2.default.createElement('div', { id: 'root', dangerouslySetInnerHTML: { __html: stringifyHTML } }),
 	      _react2.default.createElement('script', { dangerouslySetInnerHTML: { __html: 'window.__PRELOADED_STATE__ = ' + JSON.stringify(initialState) + ';' } }),
-	      _react2.default.createElement('script', { src: '/dist/bundle.js' })
+	      _react2.default.createElement('script', { src: '/scripts/bundle.js' })
 	    )
 	  ));
 	}
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -313,11 +305,15 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _react = __webpack_require__(3);
+	var _react = __webpack_require__(4);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactRedux = __webpack_require__(5);
+	var _reactRedux = __webpack_require__(6);
+
+	var _app = __webpack_require__(13);
+
+	var _app2 = _interopRequireDefault(_app);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -348,7 +344,7 @@
 
 	      return _react2.default.createElement(
 	        'div',
-	        null,
+	        { className: _app2.default.root },
 	        initialMessage
 	      );
 	    }
@@ -366,13 +362,15 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(App);
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports) {
 
-	module.exports = require("axios");
+	module.exports = {
+		"root": "app_root_3dVcj"
+	};
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports) {
 
 	module.exports = require("path");

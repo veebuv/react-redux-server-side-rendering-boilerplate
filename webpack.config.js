@@ -32,12 +32,25 @@ const config = {
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style', 'css-loader?modules&importLoaders=1&localIdentName=[name]_[local]_[hash:base64:5]'),
+        loader: ExtractTextPlugin.extract('style', 'css-loader?modules&importLoaders=1&localIdentName=[name]_[local]_[hash:base64:5]!postcss?parser=postcss-scss'),
       },
       { test: /\.(png|jpg|jpeg|gif|svg|woff)$/,
         loader: 'file?name=[name].[ext]', exclude: /node_modules/,
       },
     ],
+  },
+
+  postcss() {
+    return [
+      require('autoprefixer')({
+        browsers: [
+          'last 2 Chrome versions',
+          'Explorer >= 10',
+          'last 2 Firefox versions',
+          'Safari >= 8',
+        ],
+      }),
+    ];
   },
 };
 
@@ -68,6 +81,19 @@ const serverConfig = {
         loader: 'file?name=[name].[ext]', exclude: /node_modules/,
       },
     ],
+  },
+
+  postcss() {
+    return [
+      require('autoprefixer')({
+        browsers: [
+          'last 2 Chrome versions',
+          'Explorer >= 10',
+          'last 2 Firefox versions',
+          'Safari >= 8',
+        ],
+      }),
+    ];
   },
 
 };
