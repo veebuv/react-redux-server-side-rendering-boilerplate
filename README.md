@@ -10,3 +10,5 @@ as done so in the server.js file
 Example uses openweathermap's api which is easy to use and acquire a key from
 
 All the best!
+
+:)
